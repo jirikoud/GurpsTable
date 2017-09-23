@@ -10,4 +10,11 @@
     <string name="magic_disruption_button_spell">Kouzlo</string>
     <string name="magic_disruption_button_total">Totální úspěch</string>
     <string name="magic_disruption_button_fatal">Fatální neúspěch</string>
+    <string name="magic_disruption_button_failed">Neúspěch</string>
+    <string name="magic_disruption_button_success">Úspěch</string>
+    <string name="magic_disruption_spell_energy">Energie kouzla</string>
+    <string name="magic_disruption_spell_info">Zadejte výsledek sesílání kouzla, v případě úspěšného seslání jeho energii (při neúspěchu se počítá s energií rovnou 1)</string>
+    <string name="magic_disruption_fatal_info">Fatální neúspěch při sesílání kouzla vždy vede k průchodu astrální bránou. Zadejte energii sesílaného kouzla.</string>
+    <string name="magic_disruption_button_ok">Ok</string>
+    <string name="magic_disruption_roll">Výsledek hodu na průchod</string>
 </resources>

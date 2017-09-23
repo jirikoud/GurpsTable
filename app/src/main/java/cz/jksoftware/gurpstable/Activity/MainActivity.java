@@ -1,14 +1,24 @@
 package cz.jksoftware.gurpstable.Activity;
 
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import cz.jksoftware.gurpstable.Dialog.SpellEnergyDialog;
+import cz.jksoftware.gurpstable.Dialog.SpellFatalDialog;
 import cz.jksoftware.gurpstable.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity
+    extends
+        AppCompatActivity
+    implements
+        SpellEnergyDialog.ResultListener,
+        SpellFatalDialog.ResultListener {
+
+    public static final int REQUEST_SPELL_RESULT = 100;
 
     private TextInputEditText mTextEditLevel;
     private TextInputEditText mTextEditThauma;
@@ -31,10 +41,18 @@ public class MainActivity extends AppCompatActivity {
         return level;
     }
 
+    private int getThaumaLevel(){
+        return (18 - getLevel());
+    }
+
+    private int getRitualLevel(){
+        return (15 - getLevel());
+    }
+
     private void updateLevel(int level){
         mTextEditLevel.setText(String.valueOf(level));
-        mTextEditThauma.setText(String.valueOf(18 - level));
-        mTextEditRitual.setText(String.valueOf(15 - level));
+        mTextEditThauma.setText(String.valueOf(getThaumaLevel()));
+        mTextEditRitual.setText(String.valueOf(getRitualLevel()));
     }
 
     private void prepareButtons() {
@@ -67,6 +85,46 @@ public class MainActivity extends AppCompatActivity {
                 updateLevel(level);
             }
         });
+        mButtonSpell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SpellEnergyDialog dialog = SpellEnergyDialog.newInstance(MainActivity.this);
+                dialog.show(getSupportFragmentManager(), "energy");
+            }
+        });
+        mButtonFatal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SpellFatalDialog dialog = SpellFatalDialog.newInstance(MainActivity.this);
+                dialog.show(getSupportFragmentManager(), "energy");
+            }
+        });
+    }
+
+    @Override
+    public void onSpellFailed() {
+        Intent intent = new Intent(this, SpellResultActivity.class);
+        intent.putExtra(SpellResultActivity.EXTRA_LIMIT, getThaumaLevel());
+        intent.putExtra(SpellResultActivity.EXTRA_SPELL_STATE, SpellResultActivity.SPELL_STATE_FAIL);
+        startActivityForResult(intent, REQUEST_SPELL_RESULT);
+    }
+
+    @Override
+    public void onSpellSuccess(int energy) {
+        Intent intent = new Intent(this, SpellResultActivity.class);
+        intent.putExtra(SpellResultActivity.EXTRA_LIMIT, getThaumaLevel());
+        intent.putExtra(SpellResultActivity.EXTRA_SPELL_STATE, SpellResultActivity.SPELL_STATE_SUCCESS);
+        intent.putExtra(SpellResultActivity.EXTRA_ENERGY, energy);
+        startActivityForResult(intent, REQUEST_SPELL_RESULT);
+    }
+
+    @Override
+    public void onSpellFatal(int energy) {
+        Intent intent = new Intent(this, SpellResultActivity.class);
+        intent.putExtra(SpellResultActivity.EXTRA_LIMIT, getThaumaLevel());
+        intent.putExtra(SpellResultActivity.EXTRA_SPELL_STATE, SpellResultActivity.SPELL_STATE_FATAL);
+        intent.putExtra(SpellResultActivity.EXTRA_ENERGY, energy);
+        startActivityForResult(intent, REQUEST_SPELL_RESULT);
     }
 
     @Override
