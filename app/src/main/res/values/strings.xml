@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">GurpsTable</string>
+
+    <string name="magic_disruption_level">Úroveň narušení</string>
+    <string name="magic_disruption_button_plus">+</string>
+    <string name="magic_disruption_button_minus">-</string>
+    <string name="magic_disruption_target_number">Cílové číslo</string>
+    <string name="magic_disruption_thauma">Mág</string>
+    <string name="magic_disruption_ritual">Ritualista</string>
+    <string name="magic_disruption_button_spell">Kouzlo</string>
+    <string name="magic_disruption_button_total">Totální úspěch</string>
+    <string name="magic_disruption_button_fatal">Fatální neúspěch</string>
+</resources>

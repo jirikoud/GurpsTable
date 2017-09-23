@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="cz.jksoftware.gurpstable.Activity.MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin_primary"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/magic_disruption_level"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_primary"
+            >
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="@dimen/magic_disruption_level_width"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/text_edit_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:enabled="false" />
+            </android.support.design.widget.TextInputLayout>
+            <Button
+                android:id="@+id/button_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/magic_disruption_button_plus"
+                />
+            <Button
+                android:id="@+id/button_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/magic_disruption_button_minus"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_primary"
+            android:text="@string/magic_disruption_target_number"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_primary"
+            android:orientation="horizontal">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="@dimen/magic_disruption_level_width"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/text_edit_thauma"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:enabled="false" />
+            </android.support.design.widget.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/magic_disruption_thauma" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="@dimen/magic_disruption_level_width"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/text_edit_ritual"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:enabled="false" />
+            </android.support.design.widget.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/magic_disruption_ritual" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_primary"
+            >
+            <Button
+                android:id="@+id/button_spell"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/magic_disruption_button_spell"
+                />
+            <Button
+                android:id="@+id/button_total"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/magic_disruption_button_total"
+                />
+            <Button
+                android:id="@+id/button_fatal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/magic_disruption_button_fatal"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
