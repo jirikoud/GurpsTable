@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="cz.jksoftware.gurpstable.Activity.MainActivity"
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="@string/magic_disruption_thauma" />
+                android:text="@string/magic_disruption_button_thaumatology" />
         </LinearLayout>
 
         <LinearLayout
@@ -101,6 +101,23 @@
                 android:text="@string/magic_disruption_ritual" />
         </LinearLayout>
 
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/button_thaumatology"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/magic_disruption_button_thaumatology"
+                />
+            <RadioButton
+                android:id="@+id/button_ritual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/magic_disruption_button_ritual"
+                />
+        </RadioGroup>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,4 +145,4 @@
         </LinearLayout>
 
     </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+</ScrollView>

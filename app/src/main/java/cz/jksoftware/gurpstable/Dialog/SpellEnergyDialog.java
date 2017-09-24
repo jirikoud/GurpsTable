@@ -90,9 +90,6 @@ public class SpellEnergyDialog extends DialogFragment {
 
     @Override
     public void onDismiss(DialogInterface dialog) {
-        if (getContext() != null) {
-            ViewWorkUtils.hideKeyboard(getContext(), getView());
-        }
         super.onDismiss(dialog);
     }
 

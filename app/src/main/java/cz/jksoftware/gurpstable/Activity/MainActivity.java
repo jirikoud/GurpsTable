@@ -1,11 +1,13 @@
 package cz.jksoftware.gurpstable.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
 
 import cz.jksoftware.gurpstable.Dialog.SpellEnergyDialog;
 import cz.jksoftware.gurpstable.Dialog.SpellFatalDialog;
@@ -21,18 +23,21 @@ public class MainActivity
     public static final int REQUEST_SPELL_RESULT = 100;
 
     private TextInputEditText mTextEditLevel;
-    private TextInputEditText mTextEditThauma;
+    private TextInputEditText mTextEditThaumatology;
     private TextInputEditText mTextEditRitual;
 
     private Button mButtonPlus;
     private Button mButtonMinus;
+
+    private RadioButton mButtonThaumatology;
+    private RadioButton mButtonRitual;
 
     private Button mButtonSpell;
     private Button mButtonTotal;
     private Button mButtonFatal;
 
 
-    private int getLevel(){
+    private int getLevel() {
         int level = 0;
         try {
             level = Integer.parseInt(mTextEditLevel.getText().toString());
@@ -41,17 +46,17 @@ public class MainActivity
         return level;
     }
 
-    private int getThaumaLevel(){
+    private int getThaumatologyLevel() {
         return (18 - getLevel());
     }
 
-    private int getRitualLevel(){
+    private int getRitualLevel() {
         return (15 - getLevel());
     }
 
-    private void updateLevel(int level){
+    private void updateLevel(int level) {
         mTextEditLevel.setText(String.valueOf(level));
-        mTextEditThauma.setText(String.valueOf(getThaumaLevel()));
+        mTextEditThaumatology.setText(String.valueOf(getThaumatologyLevel()));
         mTextEditRitual.setText(String.valueOf(getRitualLevel()));
     }
 
@@ -74,11 +79,23 @@ public class MainActivity
                 updateLevel(level);
             }
         });
+        mButtonThaumatology.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mButtonRitual.setChecked(false);
+            }
+        });
+        mButtonRitual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mButtonThaumatology.setChecked(false);
+            }
+        });
         mButtonTotal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int level = getLevel();
-                level = level - 5;
+                level -= level;
                 if (level < 0) {
                     level = 0;
                 }
@@ -104,7 +121,7 @@ public class MainActivity
     @Override
     public void onSpellFailed() {
         Intent intent = new Intent(this, SpellResultActivity.class);
-        intent.putExtra(SpellResultActivity.EXTRA_LIMIT, getThaumaLevel());
+        intent.putExtra(SpellResultActivity.EXTRA_LIMIT, mButtonThaumatology.isChecked() ? getThaumatologyLevel() : getRitualLevel());
         intent.putExtra(SpellResultActivity.EXTRA_SPELL_STATE, SpellResultActivity.SPELL_STATE_FAIL);
         startActivityForResult(intent, REQUEST_SPELL_RESULT);
     }
@@ -112,7 +129,7 @@ public class MainActivity
     @Override
     public void onSpellSuccess(int energy) {
         Intent intent = new Intent(this, SpellResultActivity.class);
-        intent.putExtra(SpellResultActivity.EXTRA_LIMIT, getThaumaLevel());
+        intent.putExtra(SpellResultActivity.EXTRA_LIMIT, mButtonThaumatology.isChecked() ? getThaumatologyLevel() : getRitualLevel());
         intent.putExtra(SpellResultActivity.EXTRA_SPELL_STATE, SpellResultActivity.SPELL_STATE_SUCCESS);
         intent.putExtra(SpellResultActivity.EXTRA_ENERGY, energy);
         startActivityForResult(intent, REQUEST_SPELL_RESULT);
@@ -121,7 +138,7 @@ public class MainActivity
     @Override
     public void onSpellFatal(int energy) {
         Intent intent = new Intent(this, SpellResultActivity.class);
-        intent.putExtra(SpellResultActivity.EXTRA_LIMIT, getThaumaLevel());
+        intent.putExtra(SpellResultActivity.EXTRA_LIMIT, mButtonThaumatology.isChecked() ? getThaumatologyLevel() : getRitualLevel());
         intent.putExtra(SpellResultActivity.EXTRA_SPELL_STATE, SpellResultActivity.SPELL_STATE_FATAL);
         intent.putExtra(SpellResultActivity.EXTRA_ENERGY, energy);
         startActivityForResult(intent, REQUEST_SPELL_RESULT);
@@ -133,11 +150,14 @@ public class MainActivity
         setContentView(R.layout.activity_main);
 
         mTextEditLevel = (TextInputEditText) findViewById(R.id.text_edit_level);
-        mTextEditThauma = (TextInputEditText) findViewById(R.id.text_edit_thauma);
+        mTextEditThaumatology = (TextInputEditText) findViewById(R.id.text_edit_thauma);
         mTextEditRitual = (TextInputEditText) findViewById(R.id.text_edit_ritual);
 
         mButtonPlus = (Button) findViewById(R.id.button_plus);
         mButtonMinus = (Button) findViewById(R.id.button_minus);
+
+        mButtonThaumatology = (RadioButton) findViewById(R.id.button_thaumatology);
+        mButtonRitual = (RadioButton) findViewById(R.id.button_ritual);
 
         mButtonSpell = (Button) findViewById(R.id.button_spell);
         mButtonTotal = (Button) findViewById(R.id.button_total);
@@ -145,5 +165,29 @@ public class MainActivity
 
         prepareButtons();
         updateLevel(0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_SPELL_RESULT) {
+            if (resultCode == Activity.RESULT_OK) {
+                boolean isFatal = data.getBooleanExtra(SpellResultActivity.EXTRA_IS_FATAL, false);
+                if (!isFatal) {
+                    int level = getLevel();
+                    boolean isEffect = data.getBooleanExtra(SpellResultActivity.EXTRA_IS_EFFECT, false);
+                    if (isEffect) {
+                        level -= 5;
+                        if (level < 0) {
+                            level = 0;
+                        }
+                    } else {
+                        level++;
+                    }
+                    updateLevel(level);
+                }
+                return;
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
