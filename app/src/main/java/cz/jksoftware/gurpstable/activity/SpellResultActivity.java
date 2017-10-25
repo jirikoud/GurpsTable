@@ -1,4 +1,4 @@
-package cz.jksoftware.gurpstable.Activity;
+package cz.jksoftware.gurpstable.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-import cz.jksoftware.gurpstable.Infrastructure.MagicPassageEffectHelper;
+import cz.jksoftware.gurpstable.infrastructure.MagicPassageEffectHelper;
 import cz.jksoftware.gurpstable.R;
 
 /**

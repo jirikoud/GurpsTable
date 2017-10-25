@@ -1,4 +1,4 @@
-package cz.jksoftware.gurpstable.Activity;
+package cz.jksoftware.gurpstable.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 
-import cz.jksoftware.gurpstable.Dialog.SpellEnergyDialog;
-import cz.jksoftware.gurpstable.Dialog.SpellFatalDialog;
+import cz.jksoftware.gurpstable.dialog.SpellEnergyDialog;
+import cz.jksoftware.gurpstable.dialog.SpellFatalDialog;
 import cz.jksoftware.gurpstable.R;
 
 public class MainActivity

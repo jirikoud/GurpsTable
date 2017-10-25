@@ -1,4 +1,4 @@
-package cz.jksoftware.gurpstable.Infrastructure;
+package cz.jksoftware.gurpstable.infrastructure;
 
 import android.content.Context;
 
